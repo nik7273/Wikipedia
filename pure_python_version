@@ -16,4 +16,4 @@ data = json.load(json_obj)
 
 with open('data.txt', 'w') as outfile:
     json.dump(data, outfile)
-outfile.close()
+outfile.close() 
