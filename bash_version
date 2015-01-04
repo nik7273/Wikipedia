@@ -1,0 +1,20 @@
+$ curl http://en.wikipedia.org/w/api.php?
+#^accessing the article???
+
+$ curl -o data1.txt http://en.wikipedia.org/w/api.php
+#^piping output
+
+
+
+
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://en.wikipedia.org/w/api.php?action=query&titles=Your_Highness&prop=revisions&rvprop=content&rvsection=0&format=json");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_USERAGENT, "useragent");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$result = curl_exec($ch);
+curl_close($ch);
+
+echo $result;
+?>
