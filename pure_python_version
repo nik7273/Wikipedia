@@ -7,9 +7,8 @@ x = raw_input('Enter Page: ')
 parameters = {'format' : 'json', 'action' : 'query', 'titles' : x, 'prop' : 'revisions', 'rvprop' : 'content', 'continue' : ''}
 r = requests.get('http://en.wikipedia.org/w/api.php', params=parameters)
 
-data = r.json
+data = r.json()
 
 
 with open('data.txt', 'w') as outfile:
     json.dump(data, outfile)
-outfile.close() 
