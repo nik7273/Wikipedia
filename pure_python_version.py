@@ -3,10 +3,8 @@ import json, requests, sys
 # Checks title for spacing so that the space can be replaced with an underscore in the parameters for the URL. sys.argv[1] 
 # is used so PATH variable isn't put into parameters for URL
 title = sys.argv[1]
-if " " in title:
-    x = title.replace(" ", "_")
-else:
-    x = title
+
+x = title.replace(" ", "_") if " " in title else title
     
 #Parameters to be passed into the url
 parameters = {'format' : 'json', 'action' : 'query', 'titles' : x, 'prop' : 'extracts', 'rvprop' : 'content', 'continue' : '', "exsectionformat" : "plain", "redirects" : ""}
