@@ -1,1 +1,0 @@
-{"batchcomplete": "", "query": {"normalized": [{"to": "Heart attack", "from": "heart attack"}], "pages": {"20408844": {"ns": 0, "pageid": 20408844, "revisions": [{"*": "#REDIRECT [[Myocardial infarction]]\n\n{{redr|to technical name|from synonym}}", "contentmodel": "wikitext", "contentformat": "text/x-wiki"}], "title": "Heart attack"}}}}
