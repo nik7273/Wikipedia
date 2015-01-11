@@ -17,3 +17,4 @@ with open('data.txt', 'w') as outfile:
 
 with open('data2.txt', 'w') as file2:
     file2.write(str(data["query"]["pages"]))
+
