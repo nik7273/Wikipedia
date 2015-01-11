@@ -14,12 +14,13 @@ r = requests.get('http://en.wikipedia.org/w/api.php', params=parameters)
 
 #turning that content into json and loading it
 data = r.json()
-
 #writing json content to file
-with open('data.txt', 'w') as outfile:
+with open('data.json', 'w') as outfile:
     json.dump(data, outfile)
 
 #writing plaintext to file
-with open('data2.txt', 'w') as file2:
-    file2.write(str(data["query"]["pages"]))
+with open('data.txt', 'w') as file2:
+	ids = data['query']['pages'].keys()
+	text = ' '.join([data['query']['pages'][idx]['extract'] for idx in ids])
+	file2.write(text)
 
