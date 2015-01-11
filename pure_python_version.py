@@ -1,6 +1,7 @@
 import json, requests, sys
 
-#Checks title for spacing so that the space can be replaced with an underscore in the parameters for the URL.
+# Checks title for spacing so that the space can be replaced with an underscore in the parameters for the URL. sys.argv[1] 
+# is used so PATH variable isn't put into parameters for URL
 title = sys.argv[1]
 if " " in title:
     x = title.replace(" ", "_")
