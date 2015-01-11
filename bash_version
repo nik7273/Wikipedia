@@ -1,20 +1,4 @@
-$ curl http://en.wikipedia.org/w/api.php?
-#^accessing the article???
+#!/bin/bash
+curl --globoff --get 'http://en.wikipedia.org/w/api.php' --data-urlencode format="json" --data-urlencode action="query" --data-urlencode titles=$a --data-urlencode prop="extracts" --data-urlencode rvprop="content" --data-urlencode continue="" --data-urlencode exsectionformat="plain"
 
-$ curl -o data1.txt http://en.wikipedia.org/w/api.php
-#^piping output
-
-
-
-
-<?php
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://en.wikipedia.org/w/api.php?action=query&titles=Your_Highness&prop=revisions&rvprop=content&rvsection=0&format=json");
-curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_USERAGENT, "useragent");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$result = curl_exec($ch);
-curl_close($ch);
-
-echo $result;
-?>
+// In the above example, the parameter "title" is passed. I mean to make this into a command line option so any page can be accessed.
