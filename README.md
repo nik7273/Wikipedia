@@ -20,6 +20,5 @@ Motivation
  This module explores whether a computable representation of illness can be created from online content and how these representations differ from those created from traditional sources of medical knowledge. Combining these two may help to dispel misinformation in online content and update archaic descriptions of ilnesses. 
 
 
-The files "access_wikipedia.py" and "access_wikipedia.sh" both use wikipedia's API to pull the text out of an article.
+_Access_wikipedia.(py|sh)_ extract the text of a Wikipedia article though Wikipedia's API. 
 
-Details will be added once the files are complete.
