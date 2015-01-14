@@ -22,6 +22,6 @@ Motivation
 
 The files "access_wikipedia.py" and "access_wikipedia.sh" both use wikipedia's API to pull the text out of an article.
 
-Data.json is an obsolete file and is present for the sake of being there (the file data.txt is referred to in both files(python and bash) and thus is placed in the repository).
+Data.json, data.txt, and data2.txt are obsolete files and are present for the sake of being there (the files are referred to in both .py and .sh versions of access_wikipedia and thus are placed in the repository).
 
 Details will be added once the files are complete.
