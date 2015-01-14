@@ -14,6 +14,12 @@ Summary
 Code Example
 ====
 
+    python access_wikipedia.py 'TITLE NAME'
+
+ -or-
+
+     ./access_wikipedia.sh
+
 Motivation
 ====
 
@@ -22,3 +28,9 @@ Motivation
 
 _Access_wikipedia.(py|sh)_ extract the text of a Wikipedia article though Wikipedia's API. 
 
+Open Issues
+====
+
+ - [] Disambiguation of pages 
+
+ 
