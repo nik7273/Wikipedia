@@ -1,4 +1,21 @@
-import json, requests, sys
+import json, requests, sys, codecs
+
+from HTMLParser import HTMLParser
+
+#function to strip html tags: taken from http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 
 # Checks title for spacing so that the space can be replaced with an underscore in the parameters for the URL. sys.argv[1] 
 # is used so PATH variable isn't put into parameters for URL
@@ -19,8 +36,10 @@ with open('data.json', 'w') as outfile:
     json.dump(data, outfile)
 
 #writing plaintext to file
-with open('data.txt', 'w') as file2:
-	ids = data['query']['pages'].keys()
-	text = ' '.join([data['query']['pages'][idx]['extract'] for idx in ids])
-	file2.write(text)
+with codecs.open('data.txt', 'w', 'utf-8') as file2:
+    ids = data['query']['pages'].keys()
+    text = ' '.join([data['query']['pages'][idx]['extract'] for idx in ids])
+    text = strip_tags(text)
+    file2.write(text)
+
 
