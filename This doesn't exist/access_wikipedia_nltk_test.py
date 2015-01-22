@@ -1,61 +1,55 @@
-# -*- coding: utf-8 -*-
-"""-------------------OLD CODE----------------------------------"""
 
-import json, requests, sys, codecs, nltk
+filename = '../data.txt'
+READ = 'rb'
 
-from HTMLParser import HTMLParser
+data = open(filename,READ).read().split()
+print data
 
-#function to strip html tags: taken from http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
-class MLStripper(HTMLParser):
-    def __init__(self):
-        self.reset()
-        self.fed = []
-    def handle_data(self, d):
-        self.fed.append(d)
-    def get_data(self):
-        return ''.join(self.fed)
+'''
+    plain = open('data.txt', 'r')  
+    This command opens a filestream. It doesn't assign to plain the content of DATA.TXT
+'''
 
-def strip_tags(html):
-    s = MLStripper()
-    s.feed(html)
-    return s.get_data()
+'''
+   #over here I read about tokenizing with nltk.tokenize.word_tokenize(), but I kept getting other errors with packages
+   There are many ways to tokenize a string into components. Line 5 uses a very simple 
+   method, assuming that spaces are the only thing that separates tokens and that spaces
+   are only used to separate tokens. 
 
-# Checks title for spacing so that the space can be replaced with an underscore in the parameters for the URL. sys.argv[1] 
-# is used so PATH variable isn't put into parameters for URL
-title = sys.argv[1]
+   word_tokenize uses regular expressions to account for cases when characters or groups
+   of charqcters whitespace separate tokens. 
 
-x = title.replace(" ", "_") if " " in title else title
-    
-#Parameters to be passed into the url
-parameters = {'format' : 'json', 'action' : 'query', 'titles' : x, 'prop' : 'extracts', 'rvprop' : 'content', 'continue' : '', "exsectionformat" : "plain", "redirects" : ""}
+   sent_tokenize does the same thing for sentences. The analogous method to 'split()' 
+   would be 'split('.')'. A space is the most common character separating words. A 
+   period is the most common character separating sentences. Variants of sent_tokenize
+   can be useful when analyzing text from social media. Users of social media rarely
+   follow grammar conventions. 
 
-#getting the content of the url
-r = requests.get('http://en.wikipedia.org/w/api.php', params=parameters)
+'''
 
-#turning that content into json and loading it
-data = r.json()
-#writing json content to file
-with open('data.json', 'w') as outfile:
-    json.dump(data, outfile)
 
-#writing plaintext to file
-with codecs.open('data.txt', 'w', 'utf-8') as file2:
-    ids = data['query']['pages'].keys()
-    text = ' '.join([data['query']['pages'][idx]['extract'] for idx in ids])
-    text = strip_tags(text)
-    file2.write(text) 
-"""------------------OLD CODE-------------------------"""
-
-"""----------------------NEW TEST CODE-------------------------"""
-
-plain = open('data.txt', 'r')
-#over here I read about tokenizing with nltk.tokenize.word_tokenize(), but I kept getting other errors with packages
 distri1 = nltk.FreqDist()
+'''
+    
+     The constructor for FreqDist prefers an enumerable. If you instantiate FreqDist
+     without an enumerable, then you must update the instantiation with an enumerable
+     before calling any of that instance's methods.   
+ 
+     It is more effeicient and makes for more concise and cogent code if you instantiate
+     FreqDist with an enumerable. There is no need for a nested for-loop.
+
 for sentence in nltk.tokenize.sent_tokenize(plain):
     for word in nltk.tokenize.word_tokenize(sentence):
         distri1.inc(word)
+
+
+    --> Given what I wrote above, modify the instantiation of FreqDist so that the 
+    following call works.
+'''
 common = distri1.most_common(50)
 plain.close()
+'''
+     # Remember our discussion of the 'with' idiom in Python
+'''
 print common
-
-"""------------------------NEW TEST CODE--------------------------"""
+'''
