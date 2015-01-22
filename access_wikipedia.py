@@ -49,14 +49,5 @@ with codecs.open('data.txt', 'w', 'utf-8') as file2:
     text = strip_tags(text)
     file2.write(text)
 
-plain = open('data.txt', 'r')
-#over here I read about tokenizing with nltk.tokenize.word_tokenize(), but I kept getting other errors with packages
-distri1 = nltk.FreqDist()
-for sentence in nltk.tokenize.sent_tokenize(plain):
-    for word in nltk.tokenize.word_tokenize(sentence):
-        distri1.inc(word)
-common = distri1.most_common(50)
-plain.close()
-print common
 
 
