@@ -1,4 +1,11 @@
-import json, requests, sys, codecs
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 30 19:08:33 2014
+
+@author: Nik
+"""
+
+import json, requests, sys, codecs, nltk
 
 from HTMLParser import HTMLParser
 
@@ -41,5 +48,15 @@ with codecs.open('data.txt', 'w', 'utf-8') as file2:
     text = ' '.join([data['query']['pages'][idx]['extract'] for idx in ids])
     text = strip_tags(text)
     file2.write(text)
+
+plain = open('data.txt', 'r')
+#over here I read about tokenizing with nltk.tokenize.word_tokenize(), but I kept getting other errors with packages
+distri1 = nltk.FreqDist()
+for sentence in nltk.tokenize.sent_tokenize(plain):
+    for word in nltk.tokenize.word_tokenize(sentence):
+        distri1.inc(word)
+common = distri1.most_common(50)
+plain.close()
+print common
 
 
