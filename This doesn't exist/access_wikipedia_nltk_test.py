@@ -1,10 +1,11 @@
 
 filename = '../data.txt'
 READ = 'rb'
-
-data = open(filename,READ).read().split()
-print data
-
+WRITE = 'wb'
+data = [string.lower() for string in open(filename,READ).read().split()]
+with open('sanitizted',WRITE) as outfile:
+    for word in data:
+        print>>outfile,word
 '''
     plain = open('data.txt', 'r')  
     This command opens a filestream. It doesn't assign to plain the content of DATA.TXT
@@ -52,4 +53,3 @@ plain.close()
      # Remember our discussion of the 'with' idiom in Python
 '''
 print common
-'''
