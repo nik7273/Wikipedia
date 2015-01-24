@@ -1,4 +1,4 @@
-
+import nltk
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
@@ -18,7 +18,7 @@ with open('sanitizted',WRITE) as outfile:
    are only used to separate tokens. 
 
    word_tokenize uses regular expressions to account for cases when characters or groups
-   of charqcters whitespace separate tokens. 
+   of characters whitespace separate tokens. 
 
    sent_tokenize does the same thing for sentences. The analogous method to 'split()' 
    would be 'split('.')'. A space is the most common character separating words. A 
@@ -36,7 +36,7 @@ distri1 = nltk.FreqDist()
      without an enumerable, then you must update the instantiation with an enumerable
      before calling any of that instance's methods.   
  
-     It is more effeicient and makes for more concise and cogent code if you instantiate
+     It is more efficient and makes for more concise and cogent code if you instantiate
      FreqDist with an enumerable. There is no need for a nested for-loop.
 
 for sentence in nltk.tokenize.sent_tokenize(plain):
@@ -48,7 +48,6 @@ for sentence in nltk.tokenize.sent_tokenize(plain):
     following call works.
 '''
 common = distri1.most_common(50)
-plain.close()
 '''
      # Remember our discussion of the 'with' idiom in Python
 '''
