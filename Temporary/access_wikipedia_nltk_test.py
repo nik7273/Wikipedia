@@ -1,4 +1,4 @@
-import nltk
+import nltk, matplotlib, numpy, pylab
 from nltk.stem.porter import *
 
 filename = '../data.txt'
@@ -56,3 +56,13 @@ common = distri1.most_common(50)
      # Remember our discussion of the 'with' idiom in Python
 '''
 print common
+
+"The next portion doesn't work because of error: could not convert string to float: '(most frequent word) ' "
+xvals = []
+yvals = []
+for x in common:
+    xvals.append(x[0])
+    yvals.append(x[1])
+pylab.plot(xvals, yvals)
+pylab.show()
+ 
