@@ -1,8 +1,12 @@
 import nltk
+from nltk.stem.porter import *
+
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
+stemmer = PorterStemmer()
 data = [string.lower() for string in open(filename,READ).read().split()]
+data = [stemmer.stem(word) for word in data]
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
@@ -29,7 +33,7 @@ with open('sanitizted',WRITE) as outfile:
 '''
 
 
-distri1 = nltk.FreqDist()
+distri1 = nltk.FreqDist(open('sanitizted',READ))
 '''
     
      The constructor for FreqDist prefers an enumerable. If you instantiate FreqDist
