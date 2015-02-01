@@ -1,15 +1,23 @@
 import nltk, matplotlib, numpy, pylab
+import matplotlib.ticker as mticker
 from nltk.stem.porter import *
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import string
 
+stop = stopwords.words('english')
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
 stemmer = PorterStemmer()
-data = [string.lower() for string in open(filename,READ).read().split()]
+punkt = set(string.punctuation)
+data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if word not in punkt]
 data = [stemmer.stem(word) for word in data]
+data = [word for word in data if word not in stop]   
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
+     
 '''
     plain = open('data.txt', 'r')  
     This command opens a filestream. It doesn't assign to plain the content of DATA.TXT
@@ -33,7 +41,7 @@ with open('sanitizted',WRITE) as outfile:
 '''
 
 
-distri1 = nltk.FreqDist(open('sanitizted',READ))
+distri1 = nltk.FreqDist(open('sanitizted',READ).read().splitlines())
 '''
     
      The constructor for FreqDist prefers an enumerable. If you instantiate FreqDist
@@ -52,17 +60,31 @@ for sentence in nltk.tokenize.sent_tokenize(plain):
     following call works.
 '''
 common = distri1.most_common(50)
+words,freqs = zip(*common)
+print freqs
+xrange(len(words))
 '''
      # Remember our discussion of the 'with' idiom in Python
 '''
 print common
 
 "The next portion doesn't work because of error: could not convert string to float: '(most frequent word) ' "
-xvals = []
-yvals = []
-for x in common:
-    xvals.append(x[0])
-    yvals.append(x[1])
-pylab.plot(xvals, yvals)
+color1 = (51/255., 102/255., 0/255.)
+color2 = (76/255., 0/255., 153/255.)
+pylab.plot(freqs, color=color1, lw=3, ls="--")
+for y in range(0, 150, 10):  
+    pylab.plot(range(0, 50), [y] * len(range(0, 50)), "--", lw=0.2, color="black", alpha=0.3)
+pylab.title("Top Frequencies of Words in the Wikipedia Article on Heart Attack", fontsize="16", family='eurostile', color=color1, style='oblique')
+pylab.yscale('log')
+pylab.ylim(10,150)
+pylab.xlabel('50 Most Frequent Words', family='eurostile',fontsize="14", color=color1)
+pylab.ylabel('Frequency', family='eurostile',fontsize="14", rotation=45, color=color1)
+axis = pylab.subplot(111)
+axis.spines["right"].set_visible(False)
+axis.spines["top"].set_visible(False)
+axis.spines["left"].set_visible(False)
+axis.spines["bottom"].set_visible(False)
+pylab.xticks(xrange(len(words)), words, rotation = 90, fontsize="12", family='eurostile', color=color2)
+pylab.tick_params(axis="both", which="both", bottom="off", top="off", labelbottom="on", left="off", right="off", labelleft="on")
+pylab.tight_layout()
 pylab.show()
- 
