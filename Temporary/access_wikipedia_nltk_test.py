@@ -1,5 +1,4 @@
 import nltk, matplotlib, numpy, pylab
-import matplotlib.ticker as mticker
 from nltk.stem.porter import *
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
