@@ -87,3 +87,4 @@ pylab.xticks(xrange(len(words)), words, rotation = 90, fontsize="12", family='eu
 pylab.tick_params(axis="both", which="both", bottom="off", top="off", labelbottom="on", left="off", right="off", labelleft="on")
 pylab.tight_layout()
 pylab.show()
+pylab.savefig("wikipedia-word-frequencies.png", bbox_inches="tight");  
