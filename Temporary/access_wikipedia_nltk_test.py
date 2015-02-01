@@ -1,12 +1,18 @@
-import nltk, matplotlib, numpy, pylab
+import nltk, matplotlib, numpy, pylab, string
+
 from nltk.stem.porter import *
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
+punkt = set(string.punctuation)
 stemmer = PorterStemmer()
-data = [string.lower() for string in open(filename,READ).read().split()]
-data = [stemmer.stem(word) for word in data]
+data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if word not in punkt]
+stop = stopwords.words('english')
+data = [word for word in data if word not in stop]
+#data = [stemmer.stem(word) for word in data]
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
@@ -33,7 +39,7 @@ with open('sanitizted',WRITE) as outfile:
 '''
 
 
-distri1 = nltk.FreqDist(open('sanitizted',READ))
+distri1 = nltk.FreqDist(open('sanitizted',READ).read().splitlines())
 '''
     
      The constructor for FreqDist prefers an enumerable. If you instantiate FreqDist
@@ -55,14 +61,10 @@ common = distri1.most_common(50)
 '''
      # Remember our discussion of the 'with' idiom in Python
 '''
-print common
-
+words,freqs = zip(*common)
 "The next portion doesn't work because of error: could not convert string to float: '(most frequent word) ' "
-xvals = []
-yvals = []
-for x in common:
-    xvals.append(x[0])
-    yvals.append(x[1])
-pylab.plot(xvals, yvals)
+pylab.plot(freqs)
+pylab.xticks(xrange(len(words)),words,rotation='vertical')
+pylab.tight_layout()
 pylab.show()
  
