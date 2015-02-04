@@ -1,30 +1,20 @@
 import nltk, matplotlib, numpy, pylab, string
 
+import matplotlib.pyplot as plt 
+import Graphics as artist
+
 from nltk.stem.porter import *
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-<<<<<<< HEAD
-=======
-import string
->>>>>>> upstream/master
 
 stop = stopwords.words('english')
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
 punkt = set(string.punctuation)
-stemmer = PorterStemmer()
-<<<<<<< HEAD
 data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if word not in punkt]
 stop = stopwords.words('english')
 data = [word for word in data if word not in stop]
-#data = [stemmer.stem(word) for word in data]
-=======
-punkt = set(string.punctuation)
-data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if word not in punkt]
-data = [stemmer.stem(word) for word in data]
-data = [word for word in data if word not in stop]   
->>>>>>> upstream/master
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
@@ -70,39 +60,26 @@ for sentence in nltk.tokenize.sent_tokenize(plain):
     --> Given what I wrote above, modify the instantiation of FreqDist so that the 
     following call works.
 '''
-common = distri1.most_common(50)
+common = distri1.most_common(30)
 words,freqs = zip(*common)
-print freqs
-xrange(len(words))
+
 '''
      # Remember our discussion of the 'with' idiom in Python
 '''
 words,freqs = zip(*common)
 "The next portion doesn't work because of error: could not convert string to float: '(most frequent word) ' "
-<<<<<<< HEAD
-pylab.plot(freqs)
-pylab.xticks(xrange(len(words)),words,rotation='vertical')
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.semilogy(freqs,'k--',linewidth=3)
+artist.adjust_spines(ax)
+
+ax.set_xticks(xrange(len(words)))
+ax.set_xticklabels([r'\textbf{\textsc{%s}'%word for word in words],rotation='vertical')
+
+
+ax.set_title(artist.format("Frequencies of Words from the Wikipedia Article on Heart Attack"))
+
 pylab.tight_layout()
 pylab.show()
- 
-=======
-color1 = (51/255., 102/255., 0/255.)
-color2 = (76/255., 0/255., 153/255.)
-pylab.plot(freqs, color=color1, lw=3, ls="--")
-for y in range(0, 150, 10):  
-    pylab.plot(range(0, 50), [y] * len(range(0, 50)), "--", lw=0.2, color="black", alpha=0.3)
-pylab.title("Top Frequencies of Words in the Wikipedia Article on Heart Attack", fontsize="16", family='eurostile', color=color1, style='oblique')
-pylab.yscale('log')
-pylab.ylim(10,150)
-pylab.xlabel('50 Most Frequent Words', family='eurostile',fontsize="14", color=color1)
-pylab.ylabel('Frequency', family='eurostile',fontsize="14", rotation=45, color=color1)
-axis = pylab.subplot(111)
-axis.spines["right"].set_visible(False)
-axis.spines["top"].set_visible(False)
-axis.spines["left"].set_visible(False)
-axis.spines["bottom"].set_visible(False)
-pylab.xticks(xrange(len(words)), words, rotation = 90, fontsize="12", family='eurostile', color=color2)
-pylab.tick_params(axis="both", which="both", bottom="off", top="off", labelbottom="on", left="off", right="off", labelleft="on")
-pylab.tight_layout()
-pylab.show()
->>>>>>> upstream/master
+pylab.savefig("wikipedia-word-frequencies.png", bbox_inches="tight")  
