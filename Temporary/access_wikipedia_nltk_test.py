@@ -70,8 +70,6 @@ print common
 "The next portion doesn't work because of error: could not convert string to float: '(most frequent word) ' "
 color1 = (0/255., 0/255., 0/255.)
 pylab.plot(freqs, color=color1, lw=3, ls="--")
-for y in range(0, 150, 10):  
-    pylab.plot(range(0, 50), [y] * len(range(0, 50)), "--", lw=0.2, color="black", alpha=0.3)
 pylab.title("Top Frequencies of Words in the Wikipedia Article on Heart Attack", fontsize="16", family='eurostile', color=color1, style='oblique')
 pylab.ylim(10,150)
 pylab.xlabel('Words', family='eurostile',fontsize="14", color=color1)
@@ -83,7 +81,7 @@ axis.spines["left"].set_visible(True)
 axis.spines["bottom"].set_visible(True)
 axis.set_yscale('log', nonposy='clip')
 pylab.xticks(xrange(len(words)), words, rotation = 90, fontsize="12", family='eurostile', color=color1)
-pylab.tick_params(axis="both", which="both", bottom="off", top="off", labelbottom="on", left="off", right="off", labelleft="on")
+pylab.tick_params(axis="both", which="both", bottom="off", top="off", labelbottom="on", left="on", right="off", labelleft="on")
 pylab.tight_layout()
 pylab.show()
 pylab.savefig("wikipedia-word-frequencies.png", bbox_inches="tight")  
