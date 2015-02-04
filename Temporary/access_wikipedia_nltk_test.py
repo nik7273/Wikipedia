@@ -1,18 +1,20 @@
-import nltk, matplotlib, numpy, pylab
+import nltk, matplotlib, numpy, pylab, string
+
+import matplotlib.pyplot as plt 
+import Graphics as artist
+
 from nltk.stem.porter import *
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-import string
 
 stop = stopwords.words('english')
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
-stemmer = PorterStemmer()
 punkt = set(string.punctuation)
 data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if word not in punkt]
-data = [stemmer.stem(word) for word in data]
-data = [word for word in data if word not in stop]   
+stop = stopwords.words('english')
+data = [word for word in data if word not in stop]
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
@@ -58,30 +60,26 @@ for sentence in nltk.tokenize.sent_tokenize(plain):
     --> Given what I wrote above, modify the instantiation of FreqDist so that the 
     following call works.
 '''
-common = distri1.most_common(50)
+common = distri1.most_common(30)
 words,freqs = zip(*common)
-print freqs
-xrange(len(words))
+
 '''
      # Remember our discussion of the 'with' idiom in Python
 '''
-print common
-
+words,freqs = zip(*common)
 "The next portion doesn't work because of error: could not convert string to float: '(most frequent word) ' "
-color1 = (0/255., 0/255., 0/255.)
-pylab.plot(freqs, color=color1, lw=3, ls="--")
-pylab.title("Top Frequencies of Words in the Wikipedia Article on Heart Attack", fontsize="16", family='eurostile', color=color1, style='oblique')
-pylab.ylim(10,150)
-pylab.xlabel('Words', family='eurostile',fontsize="14", color=color1)
-pylab.ylabel('Word Count', family='eurostile',fontsize="14", rotation="vertical", color=color1)
-axis = pylab.subplot(111)
-axis.spines["right"].set_visible(False)
-axis.spines["top"].set_visible(False)
-axis.spines["left"].set_visible(True)
-axis.spines["bottom"].set_visible(True)
-axis.set_yscale('log', nonposy='clip')
-pylab.xticks(xrange(len(words)), words, rotation = 90, fontsize="12", family='eurostile', color=color1)
-pylab.tick_params(axis="both", which="both", bottom="off", top="off", labelbottom="on", left="on", right="off", labelleft="on")
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.semilogy(freqs,'k--',linewidth=3)
+artist.adjust_spines(ax)
+
+ax.set_xticks(xrange(len(words)))
+ax.set_xticklabels([r'\textbf{\textsc{%s}'%word for word in words],rotation='vertical')
+
+
+ax.set_title(artist.format("Frequencies of Words from the Wikipedia Article on Heart Attack"))
+
 pylab.tight_layout()
 pylab.show()
 pylab.savefig("wikipedia-word-frequencies.png", bbox_inches="tight")  
