@@ -33,10 +33,11 @@ artist.adjust_spines(ax)
 
 ax.set_xticks(xrange(len(words)))
 ax.set_xticklabels([r'\textbf{\textsc{%s}'%word for word in words],rotation='vertical')
+ax.set_ylabel(artist.format("Word Count"))
 
 
 ax.set_title(artist.format("Frequencies of Words from the Wikipedia Article on Heart Attack"))
 
 plt.tight_layout()
 plt.show()
-plt.savefig("wikipedia-word-frequencies.png", bbox_inches="tight")  
+plt.savefig("wikipedia-word-frequencies.png", bbox_inches="tight")
