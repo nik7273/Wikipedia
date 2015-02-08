@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: frequencies.ps
-%%Creator: gnuplot 5.0 patchlevel 0
-%%CreationDate: Thu Jan 22 23:00:42 2015
+%%Creator: gnuplot 4.6 patchlevel 3
+%%CreationDate: Sun Feb  8 13:01:11 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -20,7 +20,6 @@ gnudict begin
 /Dashlength 1 def
 /Landscape true def
 /Level1 false def
-/Level3 false def
 /Rounded false def
 /ClipToBoundingBox false def
 /SuppressPDFMark false def
@@ -32,11 +31,11 @@ gnudict begin
 %
 /vshift -46 def
 /dl1 {
-  10.0 Dashlength userlinewidth gnulinewidth div mul mul mul
+  10.0 Dashlength mul mul
   Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
 } def
 /dl2 {
-  10.0 Dashlength userlinewidth gnulinewidth div mul mul mul
+  10.0 Dashlength mul mul
   Rounded { currentlinewidth 0.75 mul add } if
 } def
 /hpt_ 31.5 def
@@ -50,7 +49,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 5.0 (Dec 2014)
+% Gnuplot Prolog Version 4.6 (September 2012)
 %
 %/SuppressPDFMark true def
 %
@@ -67,11 +66,11 @@ gnudict begin
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
-	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
 /Rshow {currentpoint stroke M dup stringwidth pop neg vshift R
-	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
 /Cshow {currentpoint stroke M dup stringwidth pop -2 div vshift R 
-	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
 /UP {dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
   /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def} def
 /DL {Color {setrgbcolor Solid {pop []} if 0 setdash}
@@ -85,7 +84,7 @@ gnudict begin
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
 3.8 setmiterlimit
-% Classic Line colors (version 5.0)
+% Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
 /LCa {0 0 0} def
@@ -98,20 +97,19 @@ gnudict begin
 /LC6 {0 0 0} def
 /LC7 {1 0.3 0} def
 /LC8 {0.5 0.5 0.5} def
-% Default dash patterns (version 5.0)
+% Default Line Types
 /LTw {PL [] 1 setgray} def
 /LTb {BL [] LCb DL} def
 /LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
 /LT0 {PL [] LC0 DL} def
-/LT1 {PL [2 dl1 3 dl2] LC1 DL} def
-/LT2 {PL [1 dl1 1.5 dl2] LC2 DL} def
-/LT3 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC3 DL} def
-/LT4 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
-/LT5 {PL [4 dl1 2 dl2] LC5 DL} def
-/LT6 {PL [1.5 dl1 1.5 dl2 1.5 dl1 1.5 dl2 1.5 dl1 6 dl2] LC6 DL} def
-/LT7 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC7 DL} def
-/LT8 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC8 DL} def
-/SL {[] 0 setdash} def
+/LT1 {PL [4 dl1 2 dl2] LC1 DL} def
+/LT2 {PL [2 dl1 3 dl2] LC2 DL} def
+/LT3 {PL [1 dl1 1.5 dl2] LC3 DL} def
+/LT4 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
+/LT5 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC5 DL} def
+/LT6 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC6 DL} def
+/LT7 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC7 DL} def
+/LT8 {PL [2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 4 dl2] LC8 DL} def
 /Pnt {stroke [] 0 setdash gsave 1 setlinecap M 0 0 V stroke grestore} def
 /Dia {stroke [] 0 setdash 2 copy vpt add M
   hpt neg vpt neg V hpt vpt neg V
@@ -333,14 +331,9 @@ gnudict begin
 %
 /languagelevel where
  {pop languagelevel} {1} ifelse
-dup 2 lt
-	{/InterpretLevel1 true def
-	 /InterpretLevel3 false def}
-	{/InterpretLevel1 Level1 def
-	 2 gt
-	    {/InterpretLevel3 Level3 def}
-	    {/InterpretLevel3 false def}
-	 ifelse }
+ 2 lt
+	{/InterpretLevel1 true def}
+	{/InterpretLevel1 Level1 def}
  ifelse
 %
 % PostScript level 2 pattern fill definitions
@@ -429,35 +422,6 @@ Level1 {Level1PatternFill} {Level2PatternFill} ifelse
 /Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
 dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
 currentdict end definefont pop
-%
-/MFshow {
-   { dup 5 get 3 ge
-     { 5 get 3 eq {gsave} {grestore} ifelse }
-     {dup dup 0 get findfont exch 1 get scalefont setfont
-     [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
-     get exch 4 get {textshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
-     {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
-     get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
-     dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
-     textshow 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
-     pop aload pop M} ifelse }ifelse }ifelse }
-     ifelse }
-   forall} def
-/Gswidth {dup type /stringtype eq {stringwidth} {pop (n) stringwidth} ifelse} def
-/MFwidth {0 exch { dup 5 get 3 ge { 5 get 3 eq { 0 } { pop } ifelse }
- {dup 3 get{dup dup 0 get findfont exch 1 get scalefont setfont
-     6 get Gswidth pop add} {pop} ifelse} ifelse} forall} def
-/MLshow { currentpoint stroke M
-  0 exch R
-  Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
-/MRshow { currentpoint stroke M
-  exch dup MFwidth neg 3 -1 roll R
-  Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
-/MCshow { currentpoint stroke M
-  exch dup MFwidth -2 div 3 -1 roll R
-  Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
-/XYsave    { [( ) 1 2 true false 3 ()] } bind def
-/XYrestore { [( ) 1 2 true false 4 ()] } bind def
 Level1 SuppressPDFMark or 
 {} {
 /SDict 10 dict def
@@ -467,40 +431,15 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (frequencies.ps)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 5.0 patchlevel 0)
-  /Author (nirgal)
+  /Creator (gnuplot 4.6 patchlevel 3)
+  /Author (Nik)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Jan 22 23:00:42 2015)
+  /CreationDate (Sun Feb  8 13:01:11 2015)
   /DOCINFO pdfmark
 end
 } ifelse
 end
-%
-% Support for boxed text - Ethan A Merritt May 2005
-%
-/InitTextBox { userdict /TBy2 3 -1 roll put userdict /TBx2 3 -1 roll put
-           userdict /TBy1 3 -1 roll put userdict /TBx1 3 -1 roll put
-	   /Boxing true def } def
-/ExtendTextBox { Boxing
-    { gsave dup false charpath pathbbox
-      dup TBy2 gt {userdict /TBy2 3 -1 roll put} {pop} ifelse
-      dup TBx2 gt {userdict /TBx2 3 -1 roll put} {pop} ifelse
-      dup TBy1 lt {userdict /TBy1 3 -1 roll put} {pop} ifelse
-      dup TBx1 lt {userdict /TBx1 3 -1 roll put} {pop} ifelse
-      grestore } if } def
-/PopTextBox { newpath TBx1 TBxmargin sub TBy1 TBymargin sub M
-               TBx1 TBxmargin sub TBy2 TBymargin add L
-	       TBx2 TBxmargin add TBy2 TBymargin add L
-	       TBx2 TBxmargin add TBy1 TBymargin sub L closepath } def
-/DrawTextBox { PopTextBox stroke /Boxing false def} def
-/FillTextBox { gsave PopTextBox 1 1 1 setrgbcolor fill grestore /Boxing false def} def
-0 0 0 0 InitTextBox
-/TBxmargin 20 def
-/TBymargin 20 def
-/Boxing false def
-/textshow { ExtendTextBox Gshow } def
-%
 %%EndProlog
 %%Page: 1 1
 gnudict begin
@@ -516,761 +455,1044 @@ newpath
 BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
 1.000 UL
 LTb
-686 1568 M
+686 1820 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 1568 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1)]
-] -46.7 MRshow
+-6282 0 R
+( 0) Rshow
 1.000 UL
 LTb
-686 2119 M
+686 2100 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 2119 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.5)]
-] -46.7 MRshow
+-6282 0 R
+( 10) Rshow
 1.000 UL
 LTb
-686 2669 M
+686 2380 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 2669 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 2)]
-] -46.7 MRshow
+-6282 0 R
+( 20) Rshow
+1.000 UL
+LTb
+686 2660 M
+63 0 V
+6198 0 R
+-63 0 V
+-6282 0 R
+( 30) Rshow
+1.000 UL
+LTb
+686 2940 M
+63 0 V
+6198 0 R
+-63 0 V
+-6282 0 R
+( 40) Rshow
 1.000 UL
 LTb
 686 3220 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 3220 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 2.5)]
-] -46.7 MRshow
+-6282 0 R
+( 50) Rshow
 1.000 UL
 LTb
-686 3770 M
+686 3499 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 3770 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 3)]
-] -46.7 MRshow
+-6282 0 R
+( 60) Rshow
 1.000 UL
 LTb
-686 4321 M
+686 3779 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 4321 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 3.5)]
-] -46.7 MRshow
+-6282 0 R
+( 70) Rshow
 1.000 UL
 LTb
-686 4871 M
+686 4059 M
 63 0 V
 6198 0 R
 -63 0 V
-stroke
-602 4871 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 4)]
-] -46.7 MRshow
+-6282 0 R
+( 80) Rshow
 1.000 UL
 LTb
-686 1568 M
+686 4339 M
+63 0 V
+6198 0 R
+-63 0 V
+-6282 0 R
+( 90) Rshow
+1.000 UL
+LTb
+686 4619 M
+63 0 V
+6198 0 R
+-63 0 V
+-6282 0 R
+( 100) Rshow
+1.000 UL
+LTb
+686 1820 M
 0 63 V
-stroke
-686 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (atrial)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(atrial) Lshow
 grestore
 1.000 UL
 LTb
-790 1568 M
+749 1820 M
 0 63 V
-stroke
-790 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (dub)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(dub) Lshow
 grestore
 1.000 UL
 LTb
-895 1568 M
+811 1820 M
 0 63 V
-stroke
-895 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (lub)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(lub) Lshow
 grestore
 1.000 UL
 LTb
-999 1568 M
+874 1820 M
 0 63 V
-stroke
-999 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(1%)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(1%) Lshow
 grestore
 1.000 UL
 LTb
-1103 1568 M
+936 1820 M
 0 63 V
-stroke
-1103 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(150-lb\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(150-lb\)) Lshow
 grestore
 1.000 UL
 LTb
-1208 1568 M
+999 1820 M
 0 63 V
-stroke
-1208 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(2.5 in\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(2.5 in\)) Lshow
 grestore
 1.000 UL
 LTb
-1312 1568 M
+1062 1820 M
 0 63 V
-stroke
-1312 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(3.5 in\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(3.5 in\)) Lshow
 grestore
 1.000 UL
 LTb
-1416 1568 M
+1124 1820 M
 0 63 V
-stroke
-1416 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(5)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(5) Lshow
 grestore
 1.000 UL
 LTb
-1521 1568 M
+1187 1820 M
 0 63 V
-stroke
-1521 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(5 in\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(5 in\)) Lshow
 grestore
 1.000 UL
 LTb
-1625 1568 M
+1249 1820 M
 0 63 V
-stroke
-1625 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(99%\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(99%\)) Lshow
 grestore
 1.000 UL
 LTb
-1730 1568 M
+1312 1820 M
 0 63 V
-stroke
-1730 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(9–12 oz\).)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(9–12 oz\).) Lshow
 grestore
 1.000 UL
 LTb
-1834 1568 M
+1375 1820 M
 0 63 V
-stroke
-1834 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(ach\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(ach\)) Lshow
 grestore
 1.000 UL
 LTb
-1938 1568 M
+1437 1820 M
 0 63 V
-stroke
-1938 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(also)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(also) Lshow
 grestore
 1.000 UL
 LTb
-2043 1568 M
+1500 1820 M
 0 63 V
-stroke
-2043 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(atrial)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(atrial) Lshow
 grestore
 1.000 UL
 LTb
-2147 1568 M
+1563 1820 M
 0 63 V
-stroke
-2147 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(atrioventricular)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(atrioventricular) Lshow
 grestore
 1.000 UL
 LTb
-2251 1568 M
+1625 1820 M
 0 63 V
-stroke
-2251 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(av\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(av\)) Lshow
 grestore
 1.000 UL
 LTb
-2356 1568 M
+1688 1820 M
 0 63 V
-stroke
-2356 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(bpm\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(bpm\)) Lshow
 grestore
 1.000 UL
 LTb
-2460 1568 M
+1750 1820 M
 0 63 V
-stroke
-2460 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(bpm\).)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(bpm\).) Lshow
 grestore
 1.000 UL
 LTb
-2564 1568 M
+1813 1820 M
 0 63 V
-stroke
-2564 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(co\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(co\)) Lshow
 grestore
 1.000 UL
 LTb
-2669 1568 M
+1876 1820 M
 0 63 V
-stroke
-2669 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(cvd\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(cvd\)) Lshow
 grestore
 1.000 UL
 LTb
-2773 1568 M
+1938 1820 M
 0 63 V
-stroke
-2773 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(diastole\),)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(diastole\),) Lshow
 grestore
 1.000 UL
 LTb
-2877 1568 M
+2001 1820 M
 0 63 V
-stroke
-2877 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(diastole\).)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(diastole\).) Lshow
 grestore
 1.000 UL
 LTb
-2982 1568 M
+2063 1820 M
 0 63 V
-stroke
-2982 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(dividing)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(dividing) Lshow
 grestore
 1.000 UL
 LTb
-3086 1568 M
+2126 1820 M
 0 63 V
-stroke
-3086 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(early)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(early) Lshow
 grestore
 1.000 UL
 LTb
-3190 1568 M
+2189 1820 M
 0 63 V
-stroke
-3190 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(edv\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(edv\)) Lshow
 grestore
 1.000 UL
 LTb
-3295 1568 M
+2251 1820 M
 0 63 V
-stroke
-3295 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(esv\),)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(esv\),) Lshow
 grestore
 1.000 UL
 LTb
-3399 1568 M
+2314 1820 M
 0 63 V
-stroke
-3399 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(flaps)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(flaps) Lshow
 grestore
 1.000 UL
 LTb
-3503 1568 M
+2376 1820 M
 0 63 V
-stroke
-3503 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(hr\),)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(hr\),) Lshow
 grestore
 1.000 UL
 LTb
-3608 1568 M
+2439 1820 M
 0 63 V
-stroke
-3608 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(hypercalcemia\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(hypercalcemia\)) Lshow
 grestore
 1.000 UL
 LTb
-3712 1568 M
+2502 1820 M
 0 63 V
-stroke
-3712 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(its)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(its) Lshow
 grestore
 1.000 UL
 LTb
-3817 1568 M
+2564 1820 M
 0 63 V
-stroke
-3817 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(or)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(or) Lshow
 grestore
 1.000 UL
 LTb
-3921 1568 M
+2627 1820 M
 0 63 V
-stroke
-3921 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(regurgitation\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(regurgitation\)) Lshow
 grestore
 1.000 UL
 LTb
-4025 1568 M
+2690 1820 M
 0 63 V
-stroke
-4025 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(sa\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(sa\)) Lshow
 grestore
 1.000 UL
 LTb
-4130 1568 M
+2752 1820 M
 0 63 V
-stroke
-4130 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(start)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(start) Lshow
 grestore
 1.000 UL
 LTb
-4234 1568 M
+2815 1820 M
 0 63 V
-stroke
-4234 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(stenosis\),)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(stenosis\),) Lshow
 grestore
 1.000 UL
 LTb
-4338 1568 M
+2877 1820 M
 0 63 V
-stroke
-4338 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(stroke)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(stroke) Lshow
 grestore
 1.000 UL
 LTb
-4443 1568 M
+2940 1820 M
 0 63 V
-stroke
-4443 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(sv\),)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(sv\),) Lshow
 grestore
 1.000 UL
 LTb
-4547 1568 M
+3003 1820 M
 0 63 V
-stroke
-4547 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(tendinous)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(tendinous) Lshow
 grestore
 1.000 UL
 LTb
-4651 1568 M
+3065 1820 M
 0 63 V
-stroke
-4651 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(the)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(the) Lshow
 grestore
 1.000 UL
 LTb
-4756 1568 M
+3128 1820 M
 0 63 V
-stroke
-4756 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(though)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(though) Lshow
 grestore
 1.000 UL
 LTb
-4860 1568 M
+3190 1820 M
 0 63 V
-stroke
-4860 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(tricuspid,)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(tricuspid,) Lshow
 grestore
 1.000 UL
 LTb
-4964 1568 M
+3253 1820 M
 0 63 V
-stroke
-4964 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(via)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(via) Lshow
 grestore
 1.000 UL
 LTb
-5069 1568 M
+3316 1820 M
 0 63 V
-stroke
-5069 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(which)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(which) Lshow
 grestore
 1.000 UL
 LTb
-5173 1568 M
+3378 1820 M
 0 63 V
-stroke
-5173 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (\(±25\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(\(±25\)) Lshow
 grestore
 1.000 UL
 LTb
-5277 1568 M
+3441 1820 M
 0 63 V
-stroke
-5277 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (+5)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(+5) Lshow
 grestore
 1.000 UL
 LTb
-5382 1568 M
+3503 1820 M
 0 63 V
-stroke
-5382 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (-)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(-) Lshow
 grestore
 1.000 UL
 LTb
-5486 1568 M
+3566 1820 M
 0 63 V
-stroke
-5486 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (.)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(.) Lshow
 grestore
 1.000 UL
 LTb
-5590 1568 M
+3629 1820 M
 0 63 V
-stroke
-5590 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (1\))]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(1\)) Lshow
 grestore
 1.000 UL
 LTb
-5695 1568 M
+3691 1820 M
 0 63 V
-stroke
-5695 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (10)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(10) Lshow
 grestore
 1.000 UL
 LTb
-5799 1568 M
+3754 1820 M
 0 63 V
-stroke
-5799 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (100)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(100) Lshow
 grestore
 1.000 UL
 LTb
-5904 1568 M
+3817 1820 M
 0 63 V
-stroke
-5904 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (120)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(120) Lshow
 grestore
 1.000 UL
 LTb
-6008 1568 M
+3879 1820 M
 0 63 V
-stroke
-6008 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (12 cm)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(12 cm) Lshow
 grestore
 1.000 UL
 LTb
-6112 1568 M
+3942 1820 M
 0 63 V
-stroke
-6112 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (145)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(145) Lshow
 grestore
 1.000 UL
 LTb
-6217 1568 M
+4004 1820 M
 0 63 V
-stroke
-6217 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (150bpm)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(150bpm) Lshow
 grestore
 1.000 UL
 LTb
-6321 1568 M
+4067 1820 M
 0 63 V
-stroke
-6321 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (15–20)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(15–20) Lshow
 grestore
 1.000 UL
 LTb
-6425 1568 M
+4130 1820 M
 0 63 V
-stroke
-6425 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (165–185)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(165–185) Lshow
 grestore
 1.000 UL
 LTb
-6530 1568 M
+4192 1820 M
 0 63 V
-stroke
-6530 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (185-195)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(185-195) Lshow
 grestore
 1.000 UL
 LTb
-6634 1568 M
+4255 1820 M
 0 63 V
-stroke
-6634 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (20)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(20) Lshow
 grestore
 1.000 UL
 LTb
-6738 1568 M
+4317 1820 M
 0 63 V
-stroke
-6738 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (200)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(200) Lshow
 grestore
 1.000 UL
 LTb
-6843 1568 M
+4380 1820 M
 0 63 V
-stroke
-6843 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (2008.)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(2008.) Lshow
 grestore
 1.000 UL
 LTb
-6947 1568 M
+4443 1820 M
 0 63 V
-stroke
-6947 1484 M
-currentpoint gsave translate -90 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (20–30)]
-] -46.7 MLshow
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(20–30) Lshow
+grestore
+1.000 UL
+LTb
+4505 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(22) Lshow
+grestore
+1.000 UL
+LTb
+4568 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(220) Lshow
+grestore
+1.000 UL
+LTb
+4630 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(250–350) Lshow
+grestore
+1.000 UL
+LTb
+4693 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(25 mm) Lshow
+grestore
+1.000 UL
+LTb
+4756 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(28) Lshow
+grestore
+1.000 UL
+LTb
+4818 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(3.3) Lshow
+grestore
+1.000 UL
+LTb
+4881 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(30%) Lshow
+grestore
+1.000 UL
+LTb
+4943 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(30–40) Lshow
+grestore
+1.000 UL
+LTb
+5006 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(4.0–8.0) Lshow
+grestore
+1.000 UL
+LTb
+5069 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(40%.) Lshow
+grestore
+1.000 UL
+LTb
+5131 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(40–60) Lshow
+grestore
+1.000 UL
+LTb
+5194 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(5.25) Lshow
+grestore
+1.000 UL
+LTb
+5257 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(50) Lshow
+grestore
+1.000 UL
+LTb
+5319 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(55–100) Lshow
+grestore
+1.000 UL
+LTb
+5382 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(55–70) Lshow
+grestore
+1.000 UL
+LTb
+5444 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(58) Lshow
+grestore
+1.000 UL
+LTb
+5507 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(6\)) Lshow
+grestore
+1.000 UL
+LTb
+5570 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(60-100) Lshow
+grestore
+1.000 UL
+LTb
+5632 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(60bpm.) Lshow
+grestore
+1.000 UL
+LTb
+5695 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(60–100) Lshow
+grestore
+1.000 UL
+LTb
+5757 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(6 cm) Lshow
+grestore
+1.000 UL
+LTb
+5820 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(70) Lshow
+grestore
+1.000 UL
+LTb
+5883 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(70-kg) Lshow
+grestore
+1.000 UL
+LTb
+5945 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(70–80) Lshow
+grestore
+1.000 UL
+LTb
+6008 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(72) Lshow
+grestore
+1.000 UL
+LTb
+6070 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(75) Lshow
+grestore
+1.000 UL
+LTb
+6133 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(75–80) Lshow
+grestore
+1.000 UL
+LTb
+6196 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(7th) Lshow
+grestore
+1.000 UL
+LTb
+6258 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(8) Lshow
+grestore
+1.000 UL
+LTb
+6321 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(80) Lshow
+grestore
+1.000 UL
+LTb
+6384 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(80–100) Lshow
+grestore
+1.000 UL
+LTb
+6446 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(8 cm) Lshow
+grestore
+1.000 UL
+LTb
+6509 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(9) Lshow
+grestore
+1.000 UL
+LTb
+6571 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(9.2) Lshow
+grestore
+1.000 UL
+LTb
+6634 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(9th) Lshow
+grestore
+1.000 UL
+LTb
+6697 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(=) Lshow
+grestore
+1.000 UL
+LTb
+6759 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(a) Lshow
+grestore
+1.000 UL
+LTb
+6822 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(ability) Lshow
+grestore
+1.000 UL
+LTb
+6884 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(abnormal) Lshow
+grestore
+1.000 UL
+LTb
+6947 1820 M
+0 63 V
+0 -147 R
+currentpoint gsave translate -90 rotate 0 0 M
+(about) Lshow
 grestore
 1.000 UL
 LTb
 1.000 UL
 LTb
-686 4871 M
-0 -3303 V
+686 4619 M
+0 -2799 V
 6261 0 V
-0 3303 R
+0 2799 R
 -6261 0 R
-1.000 UP
 stroke
+LCb setrgbcolor
 112 3219 M
-currentpoint gsave translate -270 rotate 0 0 moveto
-[ [(Helvetica) 140.0 0.0 true true 0 (Word Count)]
-] -46.7 MCshow
+currentpoint gsave translate -270 rotate 0 0 M
+(Word Count) Cshow
 grestore
-% Begin plot #1
-1.000 UL
 LTb
 LCb setrgbcolor
-/Helvetica findfont 140 scalefont setfont
-/vshift -46 def
-1938 1568 N
-0 1101 V
-35 0 V
-0 -1101 V
--35 0 V
-Z stroke
-4025 1568 N
-0 1101 V
-35 0 V
-0 -1101 V
--35 0 V
-Z stroke
-4651 1568 N
-0 1101 V
-35 0 V
-0 -1101 V
--35 0 V
-Z stroke
-5069 1568 N
-0 1101 V
-34 0 V
-0 -1101 V
--34 0 V
-Z stroke
-5382 1568 N
-0 1101 V
-35 0 V
-0 -1101 V
--35 0 V
-Z stroke
-5799 1568 N
-0 3303 V
-35 0 V
-0 -3303 V
--35 0 V
-Z stroke
-6634 1568 N
-0 1101 V
-35 0 V
-0 -1101 V
--35 0 V
-Z stroke
-% End plot #1
-2.000 UL
+3816 98 M
+(Words) Cshow
 LTb
+3816 4829 M
+(Frequencies of Words from the Wikipedia Article on Heart Attack) Cshow
+1.000 UP
 1.000 UL
 LTb
-686 4871 M
-0 -3303 V
+% Begin plot #1
+1.000 UL
+LT0
+/Helvetica findfont 140 scalefont setfont
+/vshift -46 def
+686 1848 M
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 28 V
+63 -28 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+63 28 V
+62 -28 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 28 V
+63 -28 V
+62 0 V
+63 0 V
+63 28 V
+62 -28 V
+63 0 V
+62 28 V
+63 -28 V
+63 0 V
+62 0 V
+63 84 V
+63 -84 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 28 V
+62 -28 V
+63 0 V
+63 28 V
+62 -28 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+62 28 V
+63 -28 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 0 V
+62 28 V
+63 -28 V
+62 0 V
+63 0 V
+63 0 V
+62 28 V
+63 -28 V
+63 0 V
+62 0 V
+63 0 V
+62 0 V
+63 0 V
+63 56 V
+62 2631 V
+63 -2631 V
+62 -56 V
+63 84 V
+% End plot #1
+stroke
+LTb
+686 4619 M
+0 -2799 V
 6261 0 V
-0 3303 R
+0 2799 R
 -6261 0 R
 1.000 UP
-stroke
 stroke
 grestore
 end
 showpage
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 %%Trailer
+%%DocumentFonts: Helvetica
+%%Pages: 1
