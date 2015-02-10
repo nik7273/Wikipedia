@@ -19,12 +19,28 @@ data = [word for word in data if word not in stop]
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
+      
+filename2 = '../NSTEMI.pdf'
+data2 = [word.lower() for word in word_tokenize(open(filename2,READ).read()) if word not in punkt]
+data2 = [lemma.lemmatize(word) for word in data2]
+data2 = [word for word in data2 if word not in stop]
+with open('sanitized2',WRITE) as outfile:
+    for word in data2:
+        print>>outfile,word
 
 
 distri1 = nltk.FreqDist(open('sanitizted',READ).read().splitlines())
+distri2 = nltk.FreqDist(open('sanitized2',READ).read().splitlines())
 
 common = distri1.most_common(30)
+common2= distri2.most_common(30)
 words,freqs = zip(*common)
+words2,freqs2 = zip(*common2)
+with open("listedData.txt",WRITE) as outfile:
+    for word in words:
+        for freq in freqs:
+            print>>outfile,freq
+
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
