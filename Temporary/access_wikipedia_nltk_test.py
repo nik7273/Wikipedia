@@ -28,7 +28,6 @@ with open('sanitized2',WRITE) as outfile:
     for word in data2:
         print>>outfile,word
 
-
 distri1 = nltk.FreqDist(open('sanitizted',READ).read().splitlines())
 distri2 = nltk.FreqDist(open('sanitized2',READ).read().splitlines())
 
