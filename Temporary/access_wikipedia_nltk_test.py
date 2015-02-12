@@ -1,4 +1,4 @@
-import nltk, matplotlib, numpy, pylab, string
+import nltk, matplotlib, numpy, pylab, string, codecs
 
 import matplotlib.pyplot as plt 
 import Graphics as artist
@@ -20,11 +20,11 @@ with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word
       
-filename2 = '../NSTEMI.pdf'
-data2 = [word.lower() for word in word_tokenize(open(filename2,READ).read()) if word not in punkt]
+filename2 = "../Harrison's/NSTEMI.pdf"
+data2 = [word.lower() for word in word_tokenize(codecs.open(filename2,READ,'latin-1').read()) if word not in punkt]
 data2 = [lemma.lemmatize(word) for word in data2]
 data2 = [word for word in data2 if word not in stop]
-with open('sanitized2',WRITE) as outfile:
+with codecs.open('sanitized2',WRITE, 'utf-8') as outfile:
     for word in data2:
         print>>outfile,word
 
@@ -35,10 +35,11 @@ common = distri1.most_common(30)
 common2= distri2.most_common(30)
 words,freqs = zip(*common)
 words2,freqs2 = zip(*common2)
-with open("listedData.txt",WRITE) as outfile:
-    for word in words:
-        for freq in freqs:
-            print>>outfile,freq
+
+
+with codecs.open("listedData.txt",WRITE,'utf-8') as outfile:
+    for x,y in common:
+        print>>outfile, "%s %s" % (y, x)
 
 
 fig = plt.figure()
