@@ -1,28 +1,49 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 12 20:10:46 2015
 
-@author: Nik
-"""
-import nltk, matplotlib, numpy, pylab, string, codecs, pyPdf
+import nltk, matplotlib, numpy, pylab, string, codecs
 
 import matplotlib.pyplot as plt 
 import Graphics as artist
-
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.pdfpage import PDFPage
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from cStringIO import StringIO
 "from nltk.stem.porter import *"
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
+
 stop = stopwords.words('english')
 READ = 'rb'
 WRITE = 'wb'
 lemma = nltk.WordNetLemmatizer()
 punkt = set(string.punctuation)
 filename2 = "../Harrison's/NSTEMI.pdf"
-pdf = pyPdf.PdfFileReader(codecs.open(filename2,READ,'latin-1'))
 HarrTxt = "HarrisonTxtFromPDF.txt"
+
+#the pypdf method didnt work, so i used this instead  : http://stackoverflow.com/questions/25665/python-module-for-converting-pdf-to-text
+
+
+def pdfparser(data):
+
+    fp = file(data, 'rb')
+    rsrcmgr = PDFResourceManager()
+    retstr = StringIO()
+    codec = 'latin-1'
+    laparams = LAParams()
+    device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+    # Create a PDF interpreter object.
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    # Process each page contained in the document.
+    for page in PDFPage.get_pages(fp):
+        interpreter.process_page(page)
+        data =  retstr.getvalue() 
+    print>>outfile,data
+    
 with codecs.open(HarrTxt,WRITE,'utf-8') as outfile:
-    for page in pdf.pages:
-        print>>outfile,page.extractText()
+    pdfparser(filename2)
+    
 data2 = [word.lower() for word in word_tokenize(codecs.open(HarrTxt,READ,'utf-8').read()) if word not in punkt]
 data2 = [lemma.lemmatize(word) for word in data2]
 data2 = [word for word in data2 if word not in stop]
@@ -49,5 +70,5 @@ ax.set_ylabel(artist.format("Word Count"))
 
 plt.tight_layout()
 plt.show()
-plt.savefig("Harrison's-NSTEMI-word-frequencies.png", bbox_inches="tight")
+plt.savefig("Harrisons-NSTEMI-word-frequencies.png", bbox_inches="tight")
 
