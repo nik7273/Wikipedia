@@ -21,6 +21,7 @@ lemma = nltk.WordNetLemmatizer()
 punkt = set(string.punctuation)
 filename2 = "../Harrison's/NSTEMI.pdf"
 HarrTxt = "HarrisonTxtFromPDF.txt"
+HarrTxt2 = "HarrisonTxtFromPDF2.txt"
 
 #the pypdf method didnt work, so i used this instead  : http://stackoverflow.com/questions/25665/python-module-for-converting-pdf-to-text
 
@@ -43,8 +44,17 @@ def pdfparser(data):
     
 with codecs.open(HarrTxt,WRITE,'utf-8') as outfile:
     pdfparser(filename2)
+d={}
+with open("abbreviation_reference.txt",READ) as f:
+    d = dict(x.split(' ') for x in f)
+
     
 data2 = [word.lower() for word in word_tokenize(codecs.open(HarrTxt,READ,'utf-8').read()) if word not in punkt]
+for item in data2:
+    if item in d.keys():
+        data2[data2.index(item)] = d[item]
+        item.replace("_"," ")
+        word_tokenize(item)
 data2 = [lemma.lemmatize(word) for word in data2]
 data2 = [word for word in data2 if word not in stop]
 with codecs.open('sanitized2',WRITE,'utf-8') as outfile:
@@ -58,6 +68,8 @@ words2,freqs2 = zip(*common2)
 with codecs.open("listedData2.txt",WRITE,'utf-8') as outfile:
     for x,y in common2:
         print>>outfile, "%s %s" % (y, x)
+        
+jaccard = float(len(set(HarrTxt.split())&set(HarrTxt2.split()))/len(set(HarrTxt.split())|set(HarrTxt2.split())))
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
