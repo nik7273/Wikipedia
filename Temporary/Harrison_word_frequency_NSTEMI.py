@@ -68,8 +68,6 @@ words2,freqs2 = zip(*common2)
 with codecs.open("listedData2.txt",WRITE,'utf-8') as outfile:
     for x,y in common2:
         print>>outfile, "%s %s" % (y, x)
-        
-jaccard = float(len(set(HarrTxt.split())&set(HarrTxt2.split()))/len(set(HarrTxt.split())|set(HarrTxt2.split())))
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
