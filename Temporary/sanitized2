@@ -1050,7 +1050,6 @@ h
 st
 deviation
 0.5
-mm
 elevated
 cardiac
 marker
@@ -1352,7 +1351,6 @@ hypertension
 present
 metoprolol
 2550
-mg
 mouth
 every
 6
@@ -1361,7 +1359,6 @@ needed
 heart
 failure
 5-
-mg
 increment
 slow
 12
@@ -1447,7 +1444,6 @@ depression
 confusion
 obtundation
 25
-mg
 intravenous
 
 dose
@@ -1520,12 +1516,10 @@ reduced
 dose
 e.g.
 2.5
-mg
 intravenous
 
 metoprolol
 12.5
-mg
 oral
 metoprolol
 25
@@ -1601,7 +1595,6 @@ sublingually
 buccal
 spray
 0.30.6
-mg
 patient
 experiencing
 ischemic
@@ -1757,7 +1750,6 @@ therapy
 e.g.
 atorvastatin
 80
-mg
 prior
 percutaneous
 coronary
@@ -1863,7 +1855,6 @@ clopidogrel
 initial
 dose
 162325
-mg
 nonenteric
 formulation
 followed
@@ -1875,7 +1866,6 @@ formulation
 loading
 dose
 300-600
-mg
 followed
 75
 mg/d
@@ -1904,7 +1894,6 @@ pre-pci
 loading
 dose
 60
-mg
 followed
 10
 mg/d
@@ -1996,7 +1985,6 @@ cl
 30
 cc/min
 2.5
-mg
 subcutaneously
 
 qd
@@ -2212,12 +2200,10 @@ pretreatment
 clopidogrel
 300
 600
-mg
 loading
 dose
 followed
 75
-mg
 qd
 recommended
 prior
@@ -2232,7 +2218,6 @@ higher
 dose
 clopidogrel
 600
-mg
 loading
 dose
 150
@@ -2249,7 +2234,6 @@ patient
 patient
 receiving
 325
-mg
 aspirin
 especially
 underwent
@@ -2354,7 +2338,6 @@ percutaneous_coronary_intervention
 planned
 dose
 60
-mg
 load
 followed
 10
@@ -3074,7 +3057,6 @@ usually
 occurs
 within
 1
-cm
 plaque
 focal
 spasm

@@ -48,7 +48,7 @@ d={}
 with open("abbreviation_reference.txt",READ) as f:
     d = dict(x.split(' ') for x in f)
 
-    
+measures = ['cm', 'in', 'mg', 'lb', 'kg', 'mm', 'ft']
 data2 = [word.lower() for word in word_tokenize(codecs.open(HarrTxt,READ,'utf-8').read()) if word not in punkt]
 for item in data2:
     if item in d.keys():
@@ -57,6 +57,7 @@ for item in data2:
         word_tokenize(item)
 data2 = [lemma.lemmatize(word) for word in data2]
 data2 = [word for word in data2 if word not in stop]
+data2 = [word for word in data2 if word not in measures]
 with codecs.open('sanitized2',WRITE,'utf-8') as outfile:
     for word in data2:
         print>>outfile,word

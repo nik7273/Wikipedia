@@ -11,11 +11,13 @@ stop = stopwords.words('english')
 filename = '../data.txt'
 READ = 'rb'
 WRITE = 'wb'
+measures = ['cm', 'in', 'mg', 'lb', 'kg', 'mm', 'ft']
 lemma = nltk.WordNetLemmatizer()
 punkt = set(string.punctuation)
 data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if word not in punkt]
 data = [lemma.lemmatize(word) for word in data]
 data = [word for word in data if word not in stop]
+data = [word for word in data if word not in measures]
 with open('sanitizted',WRITE) as outfile:
     for word in data:
         print>>outfile,word

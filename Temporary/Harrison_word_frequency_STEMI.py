@@ -26,7 +26,6 @@ HarrTxt = "HarrisonTxtFromPDF2.txt"
 
 
 def pdfparser(data):
-
     fp = file(data, 'rb')
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
@@ -44,9 +43,12 @@ def pdfparser(data):
 with codecs.open(HarrTxt,WRITE,'utf-8') as outfile:
     pdfparser(filename2)
     
+measures = ['cm', 'in', 'mg', 'lb', 'kg', 'mm', 'ft']
+    
 data2 = [word.lower() for word in word_tokenize(codecs.open(HarrTxt,READ,'utf-8').read()) if word not in punkt]
 data2 = [lemma.lemmatize(word) for word in data2]
 data2 = [word for word in data2 if word not in stop]
+data2 = [word for word in data2 if word not in measures]
 with codecs.open('sanitized3',WRITE,'utf-8') as outfile:
     for word in data2:
         print>>outfile,word

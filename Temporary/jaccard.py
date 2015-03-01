@@ -3,12 +3,8 @@ import nltk
 from nltk.collocations import *
 def bigramFinder(FileA):
     bigram_measures = nltk.collocations.BigramAssocMeasures()
-    bigString = ""
     with open(FileA,'rb') as infile:
-        for line in infile:
-            nltk.word_tokenize(line)
-            bigString += (line + " ")
-    finder = BigramCollocationFinder.from_words(bigString)  
+        finder = BigramCollocationFinder.from_words(nltk.word_tokenize(infile.read()))  
     bigrams = finder.nbest(bigram_measures.pmi, 20)
     print bigrams
 
@@ -17,15 +13,17 @@ bigramFinder("sanitized2")
 bigramFinder("sanitized3")
 
 def jaccard(file1, file2):
-    jaccardset1 = []
+    jaccardset1 = ""
     with open(file1,'rb') as infile:
-        for word in infile.read().splitlines():
-            jaccardset1 += word
-    jaccardset2 = []
+        for word in infile:
+            jaccardset1 += (word + " ")
+    jaccardset2 = ""
     with open(file2, 'rb') as infile:
-        for word in infile.read().splitlines():
-            jaccardset2 += word
-    print float(len(set(jaccardset1)&set(jaccardset2))/len(set(jaccardset1)|set(jaccardset2)))
+        for word in infile:
+            jaccardset2 += (word + " ")
+    set1 = set(jaccardset1.split())
+    set2 = set(jaccardset2.split())
+    print float(len(set1 & set2))/len(set1 | set2)
     
 jaccard('sanitizted', 'sanitized2')
 jaccard('sanitizted', 'sanitized3')
