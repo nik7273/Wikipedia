@@ -18,13 +18,13 @@ data = [word.lower() for word in word_tokenize(open(filename,READ).read()) if wo
 data = [lemma.lemmatize(word) for word in data]
 data = [word for word in data if word not in stop]
 data = [word for word in data if word not in measures]
-with open('sanitizted',WRITE) as outfile:
+with open('WIKI_words',WRITE) as outfile:
     for word in data:
         print>>outfile,word
       
 
 
-distri1 = nltk.FreqDist(open('sanitizted',READ).read().splitlines())
+distri1 = nltk.FreqDist(open('WIKI_words',READ).read().splitlines())
 
 common = distri1.most_common(30)
 

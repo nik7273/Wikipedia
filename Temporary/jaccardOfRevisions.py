@@ -7,6 +7,7 @@ Created on Sun Mar 08 11:38:12 2015
 
 import sys, requests, codecs, json
 from HTMLParser import HTMLParser
+from jaccard import jaccard
 class MLStripper(HTMLParser):
     def __init__(self):
         self.reset()
@@ -45,11 +46,5 @@ def toPlainText(rdata, jsonFile, txtFile):
 toPlainText(data, 'firstRev.json', 'firstRev.txt')
 toPlainText(dataSecond, 'secondRev.json', 'secondRev.txt')
 
-def jaccard(file1, file2):
-    with open('jaccardData.txt', 'a') as outfile:
-        lst1 = set(open(file1,'rb').read().splitlines())
-        lst2 = set(open(file2,'rb').read().splitlines())
-        jaccardSim = float(len(lst1 & lst2))/len(lst1 | lst2)
-        print>>outfile,jaccardSim
-    
-jaccard('firstRev.txt', 'secondRev.txt')
+with open('jaccardData.txt', 'a') as outfile:
+    print>>outfile,jaccard('firstRev.txt', 'secondRev.txt')

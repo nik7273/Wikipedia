@@ -58,11 +58,11 @@ for item in data2:
 data2 = [lemma.lemmatize(word) for word in data2]
 data2 = [word for word in data2 if word not in stop]
 data2 = [word for word in data2 if word not in measures]
-with codecs.open('sanitized2',WRITE,'utf-8') as outfile:
+with codecs.open('NSTEMI_words',WRITE,'utf-8') as outfile:
     for word in data2:
         print>>outfile,word
         
-distri2 = nltk.FreqDist(codecs.open('sanitized2',READ).read().splitlines())
+distri2 = nltk.FreqDist(codecs.open('NSTEMI_words',READ).read().splitlines())
 
 common2 = distri2.most_common(30)
 words2,freqs2 = zip(*common2)
