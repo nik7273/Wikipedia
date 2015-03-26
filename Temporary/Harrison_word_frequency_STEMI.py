@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from plotSave import plot_and_save
 from listFreqs import fromPDFtoText, getAndListFreqs
-STEMItext = fromPDFtoText("../Harrison's/STEMI.pdf","HarrisonTxtFromPDF2.txt")
-wordss,freqss = getAndListFreqs(STEMItext, 'STEMI_words', 'listedData3.txt')
-plot_and_save(freqss, wordss, "Word Count", "Harrisons-STEMI-word-frequencies.png")
+
+plot_and_save(getAndListFreqs(fromPDFtoText("../Harrison's/STEMI.pdf","STEMITxtFromPDF.txt"), 'STEMI_words', 'listedSTEMIData.txt')["freqs"], getAndListFreqs(fromPDFtoText("../Harrison's/STEMI.pdf","STEMITxtFromPDF.txt"), 'STEMI_words', 'listedSTEMIData.txt')["words"], "Word Count", "Harrisons-STEMI-word-frequencies.png")
 
