@@ -47,6 +47,6 @@ def getAndListFreqs(textfile, wordsFile, listFile):
     with codecs.open(listFile,WRITE,'utf-8') as outfile:
         for x,y in commonWord:
             print>>outfile, "%s %s" % (y, x)
-    return words,freqs
+    return {"words": words, "freqs": freqs}
 
 
