@@ -1,21 +1,28 @@
 # -*- coding: utf-8 -*-
-
 #Search Wikipedia for Heart Attack
-
 import wikipedia, codecs
-#Generates list of search suggestions
-articleList = wikipedia.search("Heart Attack", results = 10, suggestion = True)
-#Declares list for "page" objects (with 'content' property)
-objectList = []
-for suggestion in articleList[0]:
-    #Gets rid of suggestion element with disambiguation in name (No proper content label for this page), adds page object to the list
-    articleList[0].pop(articleList[0].index(suggestion)) if "disambiguation" in suggestion else objectList.append(wikipedia.page(title = str(suggestion), auto_suggest = True, redirect = True, preload = False))
-#Prints text of each of the articles in articleList to the file "HeartText.txt"
+from awesome_print import ap 
+from pprint import pprint
+
+articles,suggestion = wikipedia.search("Heart Attack", results = 10, suggestion = True)
+
+relevant_categories = ['medical','emergencies','disease']
 with codecs.open("HeartText.txt", 'wb', 'utf-8') as outfile:
-    for article in objectList:
-        print>>outfile,article.content
-        
-        
+    for article in articles:
+        try: 
+            article = wikipedia.page(article)
+            if any([relevant_category in article.categories for relevant_category in relevant_categories]):
+                print>>outfile,article.content
+        except wikipedia.exceptions.PageError as e:
+            pprint(e)
+        except wikipedia.exceptions.DisambiguationError as e:
+            for article in e.options:
+                article = wikipedia.page(article)
+                if any([relevant_category in article.categories for relevant_category in relevant_categories]):
+                    print>>outfile,article.content
+
+'''        
+relevant_articles = []
 #List of relevant articles pertaining to the subject
 #Adds relevant articles to list based on their matching ontology (categories)
 relevant = []
@@ -26,8 +33,5 @@ for article in objectList:
             if category == stdcategory:
                 if article not in relevant:
                     relevant.append(article)
-
-
-
-
+'''
 
