@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 #Search Wikipedia for Heart Attack
-import wikipedia, codecs
+import wikipedia, codecs, itertools
 from awesome_print import ap 
 from pprint import pprint
 
+relevant_categories = {'medical','emergencies','disease'}
 
-def findRelevantArticles():
-    articles,suggestion = wikipedia.search("Heart Attack", results = 10, suggestion = True)
+
+def findRelevantArticles(term):
+    articles,suggestion = wikipedia.search(term, suggestion = True)
     relList = []
-    relevant_categories = ['medical','emergencies','disease']
     with codecs.open("HeartText.txt", 'wb', 'utf-8') as outfile:
         for article in articles:
             try: 
                 article = wikipedia.page(article)
-                if any([relevant_category in article.categories for relevant_category in relevant_categories]):
+                category_keywords = set(list(itertools.chain.from_iterable([category.lower().split() for category in article.categories])))
+                if category_keywords & relevant_categories:
                     print>>outfile,article.content
                     relList += article
             except wikipedia.exceptions.PageError as e:
@@ -25,3 +27,5 @@ def findRelevantArticles():
                         print>>outfile,article.content
                         relList += article
     return relList
+
+findRelevantArticles("Heart Attack")
