@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#FILE USED FOR TESTING AND DEBUGGING JACCARD/WIKIPEDIA ACCESS CODE
+
 import wikipedia, itertools
 
 articleList = []
