@@ -2,7 +2,7 @@
 
 #GET JACCARD SIMILARITY OF ALL HEART RELATED ARTICLES ON WIKIPEDIA (BETWEEN THEMSELVES)
 
-from jaccard import jaccard
+from utils import jaccard
 import wikipedia, codecs, nltk
 from findRelevantArticles import findRelevantArticles
 from pprint import pprint
@@ -15,7 +15,7 @@ import numpy as np
 lemma = nltk.WordNetLemmatizer()
 relArticles = findRelevantArticles("Heart Attack")
 articlefilelist = []
-wordslist = ['STEMI_words','NSTEMI_words','WIKI_words']
+wordslist = ['C:/Users/Nik/Documents/GitHub/Wikipedia/Temporary/Text and Content/STEMI_words','C:/Users/Nik/Documents/GitHub/Wikipedia/Temporary/Text and Content/NSTEMI_words','C:/Users/Nik/Documents/GitHub/Wikipedia/Temporary/Text and Content/WIKI_words']
 
 for article in relArticles:
     articlefilename = "content_"+str(article)+".txt"
@@ -34,3 +34,21 @@ matrix = np.matrix([[jaccard(i,j) for i in articlefilelist] for j in articlefile
 print matrix
 with open('jaccardVals', 'wb') as outfile:
     print>>outfile,matrix
+    
+articlefilelist += wordslist
+column_labels = articlefilelist
+row_labels = articlefilelist
+fig, ax = plt.subplots()
+heatmap = ax.pcolor(matrix, cmap=plt.cm.Blues)
+
+# put the major ticks at the middle of each cell
+ax.set_xticks(np.arange(matrix.shape[0])+0.5, minor=False)
+ax.set_yticks(np.arange(matrix.shape[1])+0.5, minor=False)
+
+# want a more natural, table-like display
+ax.invert_yaxis()
+ax.xaxis.tick_top()
+
+ax.set_xticklabels(row_labels, minor=False)
+ax.set_yticklabels(column_labels, minor=False)
+plt.show()
