@@ -42,13 +42,13 @@ nosetests.xml
 *.txt
 
 #Wrongly named files
-Heart Attack.txt20150404-145730
-Heart Attack.txt20150404-145827
-Heart Attack.txt20150404-145834
-Heart Attack.txt20150404-162410
-Heart Attack.txt20150404-162715
-Heart Attack.txt20150404-162725
-Heart Attack.txt20150404-163013
-Heart Attack.txt20150404-164651
-Heart Attack.txt20150404-164716
+*.txt20150404-145730
+*.txt20150404-145827
+*.txt20150404-145834
+*.txt20150404-162410
+*.txt20150404-162715
+*.txt20150404-162725
+*.txt20150404-163013
+*.txt20150404-164651
+*.txt20150404-164716
 >>>>>>> B-master
