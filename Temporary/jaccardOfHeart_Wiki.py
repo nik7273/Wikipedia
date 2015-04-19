@@ -15,6 +15,7 @@ import numpy as np
 lemma = nltk.WordNetLemmatizer()
 relArticles = findRelevantArticles("Heart Attack")
 articlefilelist = []
+wordslist = ['STEMI_words','NSTEMI_words','WIKI_words']
 
 for article in relArticles:
     articlefilename = "content_"+str(article)+".txt"
@@ -25,40 +26,11 @@ for article in relArticles:
         for word in content:
             print>>outfile,word
     articlefilelist.append(articlefilename)
-    
-jaccardVal = []
-filenamelistx= []
-filenamelisty= []
-#GETTING JACCARD AND SAVING TO LISTS DONE IN THE SLOWER WAY
-wordslist = ['STEMI_words','NSTEMI_words','WIKI_words']
-for articlefilename in articlefilelist:
-    filenamelistx.append(articlefilename)
-    filenamelisty.append(articlefilename)
-    inCompare = [jaccard(articlefilename, otherarticle) for otherarticle in articlefilelist]
-    for val in inCompare:
-        jaccardVal.append(val)
-    jaccardVal.append(jaccard(articlefilename, "STEMI_words"))
-    jaccardVal.append(jaccard(articlefilename, "NSTEMI_words"))
-    jaccardVal.append(jaccard(articlefilename, "WIKI_words"))
 
-for words in wordslist:
-    filenamelistx.append(words)
-    filenamelisty.append(words)
-    compare = [jaccard(words,otherwords) for otherwords in wordslist]
-    for wordval in compare:
-       jaccardVal.append(wordval)
-       
-#PLOTTING INTO HEATMAP USING MATPLOTLIB
-fig, ax = plt.subplots()
-heatmap = ax.pcolor(jaccardVal, cmap=plt.cm.Blues)
-# put the major ticks at the middle of each cell
-ax.set_xticks(jaccardVal, minor=False)
-ax.set_yticks(jaccardVal, minor=False)
+for piece in wordslist:
+    articlefilelist.append(piece)
 
-# want a more natural, table-like display
-ax.invert_yaxis()
-ax.xaxis.tick_top()
-
-ax.set_xticklabels(filenamelistx, minor=False)
-ax.set_yticklabels(filenamelisty, minor=False)
-plt.show()
+matrix = np.matrix([[jaccard(i,j) for i in articlefilelist] for j in articlefilelist])
+print matrix
+with open('jaccardVals', 'wb') as outfile:
+    print>>outfile,matrix
