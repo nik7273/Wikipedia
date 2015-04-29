@@ -1,1 +1,0 @@
-#Python lemmatizes words and BASH removes stopwords in JaccardOfHeart_Wiki
